@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mEmptyStateTextView;
     private ListView listView;
-    private Button searchButton;
 
     BookAdapter adapter;
     ArrayList<Book> books;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.list);
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-        searchButton = (Button) findViewById(R.id.button_search);
+        Button searchButton = (Button) findViewById(R.id.button_search);
 
         //Get the saved data and show it
         if (savedInstanceState != null) {
@@ -61,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 // If there is a network connection, fetch data
                 if (networkInfo != null && networkInfo.isConnected()) {
                     //Hide the keyboard
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                     //Fire off the AsyncTask
                     EditText searchEditText = (EditText) findViewById(R.id.search_edit_text);
                     searchText = searchEditText.getText().toString().trim().replace(" ", "+");
-                    new bookAsyncTask().execute();
+                    new FetchBookAsyncTask().execute();
 
                 } else {
                     // First, hide loading indicator so error message will be visible
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    private class bookAsyncTask extends AsyncTask<String, Void, ArrayList<Book>> {
+    private class FetchBookAsyncTask extends AsyncTask<String, Void, ArrayList<Book>> {
 
         @Override
         protected void onPreExecute() {
