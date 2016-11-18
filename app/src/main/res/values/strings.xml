@@ -3,4 +3,7 @@
     <string name="search">Search</string>
     <string name="search_edittext_placeholder">Subject</string>
     <string name="empty_phrase">Search was not successfull, please try another word</string>
+    <string name="no_books">No books found</string>
+    <string name="no_internet_connection">There is no internet connection</string>
+    <string name="default_text">Just type in a word or a phrase and press search to get results</string>
 </resources>
